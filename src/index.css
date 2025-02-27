@@ -1,1 +1,9 @@
-@import "tailwindcss"
+@import 'tailwindcss';
+
+@font-face {
+  font-family: 'Header Font';
+  src: url('./assets/fonts/Shafarik-Regular.ttf') format('ttf');
+}
+body {
+  font-family: 'Header Font', sans-serif;
+}
