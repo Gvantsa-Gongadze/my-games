@@ -1,6 +1,6 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Application, Assets, Container, Sprite } from 'pixi.js';
 import { useCallback, useEffect, useRef } from 'react';
+import PixiDevtoolsHandler from '../hooks/PixiDevtoolsHandler';
 
 const WelcomePage = () => {
   const pageContainer = useRef<HTMLDivElement>(null);
@@ -14,14 +14,8 @@ const WelcomePage = () => {
     });
     pageRef.current = app;
 
-    // for PixiJS devtools
-    if (!(globalThis as any).__PIXI_APP__) {
-      (globalThis as any).__PIXI_APP__ = app;
-    }
-
-    if (!(globalThis as any).__PIXI_RENDERER__) {
-      (globalThis as any).__PIXI_RENDERER__ = app.renderer;
-    }
+    // For PixiJS devtools
+    PixiDevtoolsHandler(app);
 
     const gameContainer = new Container();
     app.stage.addChild(gameContainer);
