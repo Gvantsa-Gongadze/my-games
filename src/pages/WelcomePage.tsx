@@ -1,6 +1,7 @@
 import { Application, Assets, Container, Sprite } from 'pixi.js';
 import { useCallback, useEffect, useRef } from 'react';
 import PixiDevtoolsHandler from '../hooks/PixiDevtoolsHandler';
+import AssetsLoader, { AssetsToLoad } from '../hooks/AssetsLoader';
 
 const WelcomePage = () => {
   const pageContainer = useRef<HTMLDivElement>(null);
@@ -23,17 +24,8 @@ const WelcomePage = () => {
     if (pageContainer.current && pageContainer.current.children.length < 1) {
       pageContainer.current.appendChild(app.canvas);
     }
-
-    Assets.load([
-      {
-        alias: 'tilesBg',
-        src: 'src/assets/photos/tiles-background.jpg',
-      },
-      {
-        alias: 'bg',
-        src: 'src/assets/photos/tiles-background.jpg',
-      },
-    ]).then(() => {
+    // Load assets
+    AssetsLoader(localAssets, () => {
       const background = new Sprite(Assets.get('tilesBg'));
       background.height =
         (background.height / background.width) * app.canvas.width;
@@ -58,5 +50,16 @@ const WelcomePage = () => {
 
   return <div ref={pageContainer}></div>;
 };
+
+const localAssets: AssetsToLoad[] = [
+  {
+    alias: 'tilesBg',
+    src: 'src/assets/photos/tiles-background.jpg',
+  },
+  {
+    alias: 'bg',
+    src: 'src/assets/photos/tiles-background.jpg',
+  },
+];
 
 export default WelcomePage;
