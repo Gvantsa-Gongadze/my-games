@@ -7,7 +7,7 @@ export interface AssetsToLoad {
   alias: string;
   src: string;
 }
-const AssetsLoader = (assets: AssetsToLoad[], callback: Callback) => {
+const AssetsLoader = (assets: AssetsToLoad[], callback: Callback): void => {
   Assets.load(assets)
     .then(() => {
       callback();

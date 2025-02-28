@@ -1,11 +1,23 @@
 import { Application, Assets, Container, Sprite } from 'pixi.js';
-import { useCallback, useEffect, useRef } from 'react';
-import PixiDevtoolsHandler from '../hooks/PixiDevtoolsHandler';
-import AssetsLoader, { AssetsToLoad } from '../hooks/AssetsLoader';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import PixiDevtoolsHandler from '../hooks/PixiDevtoolsHandler.tsx';
+import AssetsLoader, { AssetsToLoad } from '../hooks/AssetsLoader.tsx';
 
 const WelcomePage = () => {
   const pageContainer = useRef<HTMLDivElement>(null);
-  const pageRef = useRef<Application | null>(null);
+  const appRef = useRef<Application | null>(null);
+  const [gameContainer, setGameContainer] = useState<Container>(
+    new Container()
+  );
+  const handleResize = useCallback(
+    (width: number): void => {
+      gameContainer.height =
+        (gameContainer.height / gameContainer.width) * width;
+      gameContainer.width = width;
+      setGameContainer(gameContainer);
+    },
+    [gameContainer]
+  );
 
   const initCanvas = useCallback(async () => {
     const app = new Application();
@@ -13,13 +25,10 @@ const WelcomePage = () => {
       backgroundColor: 0x1099bb,
       resizeTo: window,
     });
-    pageRef.current = app;
+    appRef.current = appRef?.current ?? app;
 
     // For PixiJS devtools
     PixiDevtoolsHandler(app);
-
-    const gameContainer = new Container();
-    app.stage.addChild(gameContainer);
 
     if (pageContainer.current && pageContainer.current.children.length < 1) {
       pageContainer.current.appendChild(app.canvas);
@@ -30,23 +39,27 @@ const WelcomePage = () => {
       background.height =
         (background.height / background.width) * app.canvas.width;
       background.width = app.canvas.width;
+
       gameContainer.addChild(background);
+      setGameContainer(gameContainer);
+      app.stage.addChild(gameContainer);
     });
-  }, []);
+
+    window.addEventListener('resize', () => {
+      handleResize(app.canvas.width);
+    });
+  }, [gameContainer, handleResize]);
 
   useEffect(() => {
     initCanvas();
-
-    // window.addEventListener('resize', (e) => {
-    //   console.log(e)
-    // })
     return () => {
-      if (pageRef.current) {
-        pageRef.current.destroy(true, { children: true });
-        pageRef.current = null;
+      if (appRef.current) {
+        appRef.current.destroy(true, { children: true });
+        appRef.current = null;
       }
+      window.removeEventListener('resize', () => {});
     };
-  }, [initCanvas]);
+  }, [gameContainer, initCanvas]);
 
   return <div ref={pageContainer}></div>;
 };
