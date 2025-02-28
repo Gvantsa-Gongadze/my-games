@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
 function Header() {
   return (
@@ -13,7 +13,7 @@ function Header() {
         Animations
       </Link>
     </div>
-  )
+  );
 }
 
-export default Header
+export default Header;

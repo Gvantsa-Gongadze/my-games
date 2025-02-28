@@ -1,7 +1,7 @@
-import { Route, Routes } from 'react-router-dom'
-import WelcomePage from './pages/Welcome'
-import Header from './components/Header'
-import './App.css'
+import { Route, Routes } from 'react-router-dom';
+import WelcomePage from './pages/WelcomePage';
+import Header from './components/Header';
+import './App.css';
 
 function App() {
   return (
@@ -13,7 +13,7 @@ function App() {
         <Route path="*" element={<WelcomePage />} />
       </Routes>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
