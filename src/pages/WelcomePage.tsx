@@ -1,32 +1,34 @@
 import { Application, Assets, Container, Sprite } from 'pixi.js';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 import PixiDevtoolsHandler from '../hooks/PixiDevtoolsHandler.tsx';
 import AssetsLoader, { AssetsToLoad } from '../hooks/AssetsLoader.tsx';
 
 const WelcomePage = () => {
   const pageContainer = useRef<HTMLDivElement>(null);
   const appRef = useRef<Application | null>(null);
-  const [gameContainer, setGameContainer] = useState<Container>(
-    new Container()
-  );
-  const handleResize = useCallback(
-    (width: number): void => {
-      gameContainer.height =
-        (gameContainer.height / gameContainer.width) * width;
-      gameContainer.width = width;
-      setGameContainer(gameContainer);
-    },
-    [gameContainer]
-  );
+  const gameContainerRef = useRef<Container>(new Container());
+
+  const handleResize = useCallback((width: number): void => {
+    if (!gameContainerRef.current) return;
+    gameContainerRef.current.height =
+      (gameContainerRef.current.height / gameContainerRef.current.width) *
+      width;
+    gameContainerRef.current.width = width;
+  }, []);
+
+  const initAnimation = useCallback((): void => {
+    const background = new Sprite(Assets.get('tilesBg'));
+    gameContainerRef.current.addChild(background);
+  }, []);
 
   const initCanvas = useCallback(async () => {
+    if (appRef.current) return;
     const app = new Application();
     await app.init({
       backgroundColor: 0x1099bb,
       resizeTo: window,
     });
-    appRef.current = appRef?.current ?? app;
-
+    appRef.current = app;
     // For PixiJS devtools
     PixiDevtoolsHandler(app);
 
@@ -35,20 +37,18 @@ const WelcomePage = () => {
     }
     // Load assets
     AssetsLoader(localAssets, () => {
-      const background = new Sprite(Assets.get('tilesBg'));
-      background.height =
-        (background.height / background.width) * app.canvas.width;
-      background.width = app.canvas.width;
-
-      gameContainer.addChild(background);
-      setGameContainer(gameContainer);
-      app.stage.addChild(gameContainer);
+      initAnimation();
+      handleResize(app.canvas.width);
+      app.stage.addChild(gameContainerRef.current);
     });
 
     window.addEventListener('resize', () => {
       handleResize(app.canvas.width);
     });
-  }, [gameContainer, handleResize]);
+    return () => {
+      window.removeEventListener('resize', () => {});
+    };
+  }, [handleResize, initAnimation]);
 
   useEffect(() => {
     initCanvas();
@@ -57,9 +57,12 @@ const WelcomePage = () => {
         appRef.current.destroy(true, { children: true });
         appRef.current = null;
       }
-      window.removeEventListener('resize', () => {});
+      if (gameContainerRef.current) {
+        gameContainerRef.current.destroy(true);
+        gameContainerRef.current = new Container();
+      }
     };
-  }, [gameContainer, initCanvas]);
+  }, [initCanvas]);
 
   return <div ref={pageContainer}></div>;
 };
