@@ -8,7 +8,10 @@ export interface AssetsToLoad {
   src: string;
 }
 const AssetsLoader = (assets: AssetsToLoad[], callback: Callback): void => {
-  Assets.load(assets)
+  const uniqueAssets = Array.from(
+    new Map(assets.map((item) => [item.alias, item])).values()
+  );
+  Assets.load(uniqueAssets)
     .then(() => {
       callback();
     })
