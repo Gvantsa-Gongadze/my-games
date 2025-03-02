@@ -6,7 +6,7 @@ import WelcomePageAnimation from '../components/welcome-page/WelcomePageAnimatio
 import {
   WELCOME_PAGE_CANVAS_HEIGHT,
   WELCOME_PAGE_CANVAS_WIDTH,
-} from '../constants/WelcomePageConstantsts.ts';
+} from '../constants/WelcomePageConstants.ts';
 
 const WelcomePage = () => {
   const pageContainer = useRef<HTMLDivElement>(null);

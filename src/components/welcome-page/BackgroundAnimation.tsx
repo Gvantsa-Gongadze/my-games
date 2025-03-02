@@ -4,7 +4,7 @@ import {
   WELCOME_PAGE_CANVAS_HEIGHT,
   WELCOME_PAGE_CANVAS_SCALE,
   WELCOME_PAGE_CANVAS_WIDTH,
-} from './../../constants/WelcomePageConstantsts';
+} from '../../constants/WelcomePageConstants';
 
 class BackgroundAnimation extends Container {
   constructor() {
