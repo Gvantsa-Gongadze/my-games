@@ -32,15 +32,6 @@ const RectangleAnimations = (): Container => {
     }
   );
 
-  gsap.to(rectanglesContainer.skew, {
-    x: -0.1,
-    y: 0.05,
-    duration: 6,
-    yoyo: true,
-    repeat: -1,
-    ease: Power2.easeInOut,
-  });
-
   return rectanglesContainer;
 };
 export default RectangleAnimations;
