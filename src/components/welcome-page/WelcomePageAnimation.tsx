@@ -1,6 +1,5 @@
 import { Container } from 'pixi.js';
-import BackgroundAnimation from './BackgroundAnimation.tsx';
-
+import BackgroundAnimation from './background/BackgroundAnimation.tsx';
 import RectangleAnimations from './rectangles-bottom/RectangleAnimations.tsx';
 import {
   WELCOME_PAGE_CANVAS_HEIGHT,

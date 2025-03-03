@@ -36,6 +36,20 @@ const WelcomePage = () => {
       // resizeTo: window,
     });
     appRef.current = app;
+
+    // Disable scrolling only when hovering over the canvas
+    app.canvas.addEventListener('wheel', (event) => event.preventDefault(), {
+      passive: false,
+    });
+
+    app.canvas.addEventListener(
+      'touchmove',
+      (event) => event.preventDefault(),
+      {
+        passive: false,
+      }
+    );
+
     // For PixiJS devtools
     PixiDevtoolsHandler(app);
 
