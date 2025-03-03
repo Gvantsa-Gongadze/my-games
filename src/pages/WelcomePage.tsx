@@ -5,7 +5,7 @@ import AssetsLoader, { AssetsToLoad } from '../hooks/AssetsLoader.tsx';
 import {
   WELCOME_PAGE_CANVAS_HEIGHT,
   WELCOME_PAGE_CANVAS_WIDTH,
-} from '../constants/WelcomePageConstants.ts';
+} from '../commons/WelcomePageConstants.ts';
 import WelcomePageAnim from '../components/welcome-page/WelcomePageAnimation.tsx';
 
 const WelcomePage = () => {
@@ -77,15 +77,19 @@ const WelcomePage = () => {
 const localAssets: AssetsToLoad[] = [
   {
     alias: 'tilesBg',
-    src: 'src/assets/photos/tiles-background.jpg',
+    src: 'src/assets/images/tiles-background.jpg',
   },
   {
     alias: 'shadowOverlay',
-    src: 'src/assets/photos/shadow-overlay.png',
+    src: 'src/assets/images/shadow-overlay.png',
   },
   {
     alias: 'rainbowOverlay',
-    src: 'src/assets/photos/rainbow-overlay.jpg',
+    src: 'src/assets/images/rainbow-overlay.jpg',
+  },
+  {
+    alias: 'rectange',
+    src: 'src/assets/images/rectangle.png',
   },
 ];
 

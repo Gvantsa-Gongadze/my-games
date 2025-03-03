@@ -1,16 +1,26 @@
 import { Container } from 'pixi.js';
-import BackgroundAnimation from './BackgroundAnimation';
-import CubeAnimations from './CubeAnimations';
+import BackgroundAnimation from './BackgroundAnimation.tsx';
+
+import RectangleAnimations from './rectangles-bottom/RectangleAnimations.tsx';
+import {
+  WELCOME_PAGE_CANVAS_HEIGHT,
+  WELCOME_PAGE_CANVAS_WIDTH,
+} from '../../commons/WelcomePageConstants.ts';
 
 const WelcomePageAnim = (): Container => {
   const welcomePageContainer = new Container();
+  welcomePageContainer.label = 'welcome page';
 
   const bgAnimContainer = BackgroundAnimation();
   welcomePageContainer.addChild(bgAnimContainer);
 
-  const cubesAnimation = CubeAnimations();
+  const cubesAnimation = RectangleAnimations();
   welcomePageContainer.addChild(cubesAnimation);
-  cubesAnimation.position.set(500, 200);
+
+  cubesAnimation.position.set(
+    WELCOME_PAGE_CANVAS_WIDTH * 0.5,
+    WELCOME_PAGE_CANVAS_HEIGHT * 0.6
+  );
 
   return welcomePageContainer;
 };
