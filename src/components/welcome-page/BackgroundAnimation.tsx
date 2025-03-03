@@ -6,23 +6,13 @@ import {
   WELCOME_PAGE_CANVAS_WIDTH,
 } from '../../constants/WelcomePageConstants';
 
-class BackgroundAnimation extends Container {
-  constructor() {
-    super();
+const BackgroundAnimation = (): Container => {
+  const bgContainer = new Container();
 
-    this.addBgAnimations();
-  }
-
-  addBgAnimations = (): void => {
-    this.addBg();
-    this.addShadowOverlay();
-    this.addRainbowOverlay();
-  };
-
-  addBg = (): void => {
+  const addBg = (): void => {
     const background = new Sprite(Assets.get('tilesBg'));
     background.anchor.set(0.5);
-    this.addChild(background);
+    bgContainer.addChild(background);
     background.scale.set(0.8);
     background.position.set(
       WELCOME_PAGE_CANVAS_WIDTH * 0.5,
@@ -52,7 +42,7 @@ class BackgroundAnimation extends Container {
     });
   };
 
-  addShadowOverlay = (): void => {
+  const addShadowOverlay = (): void => {
     const shadowOverlay = new Sprite(Assets.get('shadowOverlay'));
     shadowOverlay.rotation = Math.PI;
     shadowOverlay.anchor.set(0.5);
@@ -62,7 +52,7 @@ class BackgroundAnimation extends Container {
     );
     shadowOverlay.scale.set(1.7);
     shadowOverlay.alpha = 0.8;
-    this.addChild(shadowOverlay);
+    bgContainer.addChild(shadowOverlay);
     gsap.to(shadowOverlay.scale, {
       duration: 1,
       x: WELCOME_PAGE_CANVAS_SCALE + 0.5,
@@ -86,7 +76,7 @@ class BackgroundAnimation extends Container {
     });
   };
 
-  addRainbowOverlay = (): void => {
+  const addRainbowOverlay = (): void => {
     const rainbowOverlay = new Sprite(Assets.get('rainbowOverlay'));
     rainbowOverlay.anchor.set(0.5);
     rainbowOverlay.position.set(
@@ -94,7 +84,7 @@ class BackgroundAnimation extends Container {
       WELCOME_PAGE_CANVAS_HEIGHT * 0.5
     );
     rainbowOverlay.alpha = 0.5;
-    this.addChild(rainbowOverlay);
+    bgContainer.addChild(rainbowOverlay);
     gsap.to(rainbowOverlay.scale, {
       duration: 1,
       x: WELCOME_PAGE_CANVAS_SCALE - 0.1,
@@ -102,6 +92,12 @@ class BackgroundAnimation extends Container {
       ease: Power2.easeOut,
     });
   };
-}
+
+  addBg();
+  addShadowOverlay();
+  addRainbowOverlay();
+
+  return bgContainer;
+};
 
 export default BackgroundAnimation;

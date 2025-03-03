@@ -2,11 +2,11 @@ import { Application, Container } from 'pixi.js';
 import { useCallback, useEffect, useRef } from 'react';
 import PixiDevtoolsHandler from '../hooks/PixiDevtoolsHandler.tsx';
 import AssetsLoader, { AssetsToLoad } from '../hooks/AssetsLoader.tsx';
-import WelcomePageAnimation from '../components/welcome-page/WelcomePageAnimation.tsx';
 import {
   WELCOME_PAGE_CANVAS_HEIGHT,
   WELCOME_PAGE_CANVAS_WIDTH,
 } from '../constants/WelcomePageConstants.ts';
+import WelcomePageAnim from '../components/welcome-page/WelcomePageAnimation.tsx';
 
 const WelcomePage = () => {
   const pageContainer = useRef<HTMLDivElement>(null);
@@ -22,7 +22,7 @@ const WelcomePage = () => {
   // }, []);
 
   const initAnimation = useCallback((): void => {
-    animContainer.current = new WelcomePageAnimation();
+    animContainer.current = WelcomePageAnim();
     gameContainerRef.current.addChild(animContainer.current);
   }, []);
 
