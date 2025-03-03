@@ -1,8 +1,8 @@
 import { Assets, Sprite } from 'pixi.js';
 import gsap, { Power2 } from 'gsap';
-import { colorType } from '../../../commons/WelcomePageType';
+import { ColorType } from '../../../commons/WelcomePageType';
 
-const RectangleTop3DView = (tint: colorType): Sprite => {
+const RectangleTop3DView = (tint: ColorType): Sprite => {
   const rect = new Sprite(Assets.get('rectange'));
   rect.label = 'rectangle';
 

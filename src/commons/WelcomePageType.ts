@@ -1,1 +1,1 @@
-export type colorType = `#${string}` | number;
+export type ColorType = `#${string}` | number;

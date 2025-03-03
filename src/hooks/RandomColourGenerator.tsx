@@ -1,7 +1,12 @@
-import { colorType } from '../commons/WelcomePageType';
+import { ColorType } from '../commons/WelcomePageType';
 
-const getRandomColor = (): colorType => {
+export const getRandomColor = (): ColorType => {
   return Math.floor(Math.random() * 16777215);
 };
 
-export default getRandomColor;
+export const getRandomLightColor = (): ColorType => {
+  const r = Math.floor(Math.random() * 156) + 100;
+  const g = Math.floor(Math.random() * 156) + 100;
+  const b = Math.floor(Math.random() * 156) + 100;
+  return (r << 16) | (g << 8) | b;
+};
