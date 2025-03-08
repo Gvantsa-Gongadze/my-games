@@ -14,7 +14,7 @@ const BallsAnimations = (callback: SendBallCallback): Container => {
 
   const addNewBall = (): Sprite => {
     const ball = new Sprite(Assets.get('ball'));
-    ball.scale.set(0.15);
+    ball.scale.set(0.3);
     ball.position.set(
       WELCOME_PAGE_CANVAS_WIDTH - ball.width,
       WELCOME_PAGE_CANVAS_HEIGHT - ball.height
