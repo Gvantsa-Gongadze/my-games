@@ -1,13 +1,12 @@
 import { Container } from 'pixi.js';
 import RectangleTop3DView from './RectangleTop3DView';
-import { getRandomLightColor } from '../../../hooks/RandomColourGenerator';
+import { WELCOME_PAGE_MAIN_LIGHT_COLOR } from '../../../commons/WelcomePageConstants';
 
 const RectanglesTopAnimation = (): Container => {
   const rectanglesContainer = new Container();
   rectanglesContainer.label = 'rectanges top container';
-  const color = getRandomLightColor();
 
-  const rect = RectangleTop3DView(color);
+  const rect = RectangleTop3DView(WELCOME_PAGE_MAIN_LIGHT_COLOR);
   rectanglesContainer.addChild(rect);
 
   return rectanglesContainer;
