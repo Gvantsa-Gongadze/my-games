@@ -7,9 +7,9 @@
 body {
   font-family: 'Header Font', sans-serif;
   background-color: black;
-  /* border: #ff0000 5px solid; */
 }
 
-canvas {
+.welcome-page-canvas {
   /* border: #ff0000 1px solid; */
+  transition: transform 0.1s ease-in-out;
 }

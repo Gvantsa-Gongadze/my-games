@@ -20,12 +20,13 @@ const WelcomePage = () => {
     const canvasWidth = appRef.current.canvas.width;
     const scaleX = curWidth / canvasWidth;
 
-    // const differance = -(canvasWidth - curWidth) * 0.5;
-    // const differance = (window.innerHeight - appRef.current.canvas.height) / 2;
-    // console.log(appRef.current.canvas, differance);
-    // appRef.current.canvas.style.transform = `translate(0px, ${differance}px)`;
-
-    appRef.current.canvas.style.scale = `${scaleX}`;
+    const curHeight = window.innerHeight;
+    const canvasHeight = appRef.current.canvas.height;
+    const differance =
+      canvasHeight > curHeight
+        ? (canvasHeight * scaleX - curHeight) * 0.5
+        : -(curHeight - canvasHeight * scaleX) * 0.5;
+    appRef.current.canvas.style.transform = `translate(0px, ${differance}px) scale(${scaleX})`;
   }, []);
 
   const initAnimation = useCallback((): void => {
@@ -60,8 +61,9 @@ const WelcomePage = () => {
     PixiDevtoolsHandler(app);
 
     if (pageContainer.current && pageContainer.current.children.length < 1) {
-      pageContainer.current.className = 'welcome-page';
       pageContainer.current.appendChild(app.canvas);
+      app.canvas.className = 'welcome-page-canvas';
+      pageContainer.current.className = 'welcome-page';
     }
     // Load assets
     AssetsLoader(localAssets, () => {
