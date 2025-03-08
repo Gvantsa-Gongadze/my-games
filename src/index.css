@@ -6,4 +6,10 @@
 }
 body {
   font-family: 'Header Font', sans-serif;
+  background-color: black;
+  /* border: #ff0000 5px solid; */
+}
+
+canvas {
+  /* border: #ff0000 1px solid; */
 }

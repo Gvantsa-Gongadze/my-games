@@ -11,7 +11,7 @@ const RectangleTop3DView = (tint: ColorType): Sprite => {
   rect.alpha = 0.8;
   rect.tint = tint;
 
-  gsap.to(rect, {
+  gsap.to(rect.position, {
     y: -20,
     duration: 3,
     yoyo: true,

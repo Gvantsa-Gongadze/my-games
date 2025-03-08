@@ -14,12 +14,19 @@ const WelcomePage = () => {
   const gameContainerRef = useRef<Container>(new Container());
   const animContainer = useRef<Container>(new Container());
 
-  // const handleResize = useCallback((width: number): void => {
-  //   if (!gameContainerRef.current) return;
-  //   // gameContainerRef.current.height =
-  //   //   gameContainerRef.current.height / gameContainerRef.current.width;
-  //   // gameContainerRef.current.width = width;
-  // }, []);
+  const handleResize = useCallback((): void => {
+    if (!appRef.current) return;
+    const curWidth = window.innerWidth;
+    const canvasWidth = appRef.current.canvas.width;
+    const scaleX = curWidth / canvasWidth;
+
+    // const differance = -(canvasWidth - curWidth) * 0.5;
+    // const differance = (window.innerHeight - appRef.current.canvas.height) / 2;
+    // console.log(appRef.current.canvas, differance);
+    // appRef.current.canvas.style.transform = `translate(0px, ${differance}px)`;
+
+    appRef.current.canvas.style.scale = `${scaleX}`;
+  }, []);
 
   const initAnimation = useCallback((): void => {
     animContainer.current = WelcomePageAnim();
@@ -30,10 +37,9 @@ const WelcomePage = () => {
     if (appRef.current) return;
     const app = new Application();
     await app.init({
-      backgroundColor: 0xffffff,
+      backgroundColor: 0x000000,
       width: WELCOME_PAGE_CANVAS_WIDTH,
       height: WELCOME_PAGE_CANVAS_HEIGHT,
-      // resizeTo: window,
     });
     appRef.current = app;
 
@@ -54,22 +60,23 @@ const WelcomePage = () => {
     PixiDevtoolsHandler(app);
 
     if (pageContainer.current && pageContainer.current.children.length < 1) {
+      pageContainer.current.className = 'welcome-page';
       pageContainer.current.appendChild(app.canvas);
     }
     // Load assets
     AssetsLoader(localAssets, () => {
       initAnimation();
-      // handleResize(CANVAS_WIDTH * 1.2);
+      handleResize();
       app.stage.addChild(gameContainerRef.current);
     });
 
     window.addEventListener('resize', () => {
-      // handleResize(CANVAS_WIDTH * CANVAS_SCALE);
+      handleResize();
     });
     return () => {
       window.removeEventListener('resize', () => {});
     };
-  }, [initAnimation]);
+  }, [handleResize, initAnimation]);
 
   useEffect(() => {
     initCanvas();
@@ -104,6 +111,10 @@ const localAssets: AssetsToLoad[] = [
   {
     alias: 'rectange',
     src: 'src/assets/images/rectangle.png',
+  },
+  {
+    alias: 'ball',
+    src: 'src/assets/images/ball.png',
   },
 ];
 

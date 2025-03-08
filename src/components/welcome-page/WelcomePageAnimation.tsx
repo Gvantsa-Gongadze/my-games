@@ -1,12 +1,13 @@
 import { Container } from 'pixi.js';
 import gsap, { Power2 } from 'gsap';
-import BackgroundAnimation from './background/BackgroundAnimation.tsx';
 import RectangleAnimations from './rectangles-bottom/RectangleAnimations.tsx';
 import {
   WELCOME_PAGE_CANVAS_HEIGHT,
   WELCOME_PAGE_CANVAS_WIDTH,
 } from '../../commons/WelcomePageConstants.ts';
 import RectanglesTopAnimation from './rectangles-top/RectanglesTopAnimation.tsx';
+import BallsAnimations from './balls/BallsAnimations.ts';
+import BackgroundAnimation from './background/BackgroundAnimation.tsx';
 
 const WelcomePageAnim = (): Container => {
   const welcomePageContainer = new Container();
@@ -28,6 +29,9 @@ const WelcomePageAnim = (): Container => {
     WELCOME_PAGE_CANVAS_WIDTH * 0.5,
     WELCOME_PAGE_CANVAS_HEIGHT * 0.49
   );
+
+  const ballsAnimations = BallsAnimations();
+  welcomePageContainer.addChild(ballsAnimations);
 
   gsap.to([bottomRectAnimation.skew, topRectAnimation.skew], {
     x: -0.1,
