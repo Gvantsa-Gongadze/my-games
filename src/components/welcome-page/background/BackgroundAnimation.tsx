@@ -1,18 +1,15 @@
-import { Assets, Container, Sprite } from 'pixi.js';
+import { Assets, Sprite } from 'pixi.js';
 import gsap, { Power2 } from 'gsap';
 import {
+  WELCOME_PAGE_ASSETS,
   WELCOME_PAGE_CANVAS_HEIGHT,
   WELCOME_PAGE_CANVAS_SCALE,
   WELCOME_PAGE_CANVAS_WIDTH,
 } from '../../../commons/WelcomePageConstants.ts';
 
-const BackgroundAnimation = (): Container => {
-  const bgContainer = new Container();
-  bgContainer.label = 'background';
-
-  const background = new Sprite(Assets.get('tilesBg'));
+const BackgroundAnimation = (): Sprite => {
+  const background = new Sprite(Assets.get(WELCOME_PAGE_ASSETS.galaxyBg));
   background.anchor.set(0.5);
-  bgContainer.addChild(background);
   background.position.set(
     WELCOME_PAGE_CANVAS_WIDTH * 0.5,
     WELCOME_PAGE_CANVAS_HEIGHT * 0.5
@@ -35,7 +32,7 @@ const BackgroundAnimation = (): Container => {
     ease: Power2.easeInOut,
   });
 
-  return bgContainer;
+  return background;
 };
 
 export default BackgroundAnimation;

@@ -1,4 +1,4 @@
-import { Assets, Container, Sprite } from 'pixi.js';
+import { Container } from 'pixi.js';
 import {
   WELCOME_PAGE_CANVAS_HEIGHT,
   WELCOME_PAGE_CANVAS_WIDTH,
@@ -7,35 +7,26 @@ import {
 import gsap from 'gsap';
 import { getRandomNumber } from '../../../hooks/GetRandomNumber';
 import { SendBallCallback } from '../../../commons/WelcomePageType';
+import BallView from './BallView';
 
 const BallsAnimations = (callback: SendBallCallback): Container => {
   const ballsContainer = new Container();
   ballsContainer.label = ' balls container';
 
-  const addNewBall = (): Sprite => {
-    const ball = new Sprite(Assets.get('ball'));
-    ball.scale.set(0.3);
-    ball.position.set(
-      WELCOME_PAGE_CANVAS_WIDTH - ball.width,
-      WELCOME_PAGE_CANVAS_HEIGHT - ball.height
-    );
-
-    return ball;
-  };
-
   const addnewBalls = (count: number) => {
     for (let i = 0; i < count; i++) {
-      const ball = addNewBall();
+      const ball = BallView();
       ball.position.set(
-        WELCOME_PAGE_CANVAS_WIDTH + getRandomNumber(350, 500),
-        WELCOME_PAGE_CANVAS_HEIGHT + getRandomNumber(10, 200)
+        WELCOME_PAGE_CANVAS_WIDTH + getRandomNumber(350, 650),
+        WELCOME_PAGE_CANVAS_HEIGHT + getRandomNumber(50, 300)
       );
       ballsContainer.addChild(ball);
 
-      const ballX = WELCOME_PAGE_RECTANGLE_POINTS.x + getRandomNumber(-60, 100);
-      const ballY = WELCOME_PAGE_RECTANGLE_POINTS.y + getRandomNumber(-60, 100);
+      const ballX = WELCOME_PAGE_RECTANGLE_POINTS.x + getRandomNumber(-90, 90);
+      const ballY = WELCOME_PAGE_RECTANGLE_POINTS.y + getRandomNumber(-90, 90);
+
       gsap.to(ball.position, {
-        duration: 3,
+        duration: 4,
         x: ballX,
         y: ballY,
         ease: 'none',
@@ -50,7 +41,7 @@ const BallsAnimations = (callback: SendBallCallback): Container => {
     repeat: -1,
     duration: 0.09,
     onRepeat: () => {
-      addnewBalls(getRandomNumber(20, 40));
+      addnewBalls(getRandomNumber(20, 50));
     },
   });
 

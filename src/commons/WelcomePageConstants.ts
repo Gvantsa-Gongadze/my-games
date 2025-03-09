@@ -16,3 +16,9 @@ export const WELCOME_PAGE_MAIN_DARKER_COLOR: ColorType = getDarkenColor(
   WELCOME_PAGE_MAIN_LIGHT_COLOR,
   Math.random() * 50
 );
+
+export const WELCOME_PAGE_ASSETS = {
+  galaxyBg: 'galaxyBg',
+  rectange: 'rectange',
+  ball: 'ball',
+};

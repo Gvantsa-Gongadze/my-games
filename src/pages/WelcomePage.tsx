@@ -3,6 +3,7 @@ import { useCallback, useEffect, useRef } from 'react';
 import PixiDevtoolsHandler from '../hooks/PixiDevtoolsHandler.tsx';
 import AssetsLoader, { AssetsToLoad } from '../hooks/AssetsLoader.tsx';
 import {
+  WELCOME_PAGE_ASSETS,
   WELCOME_PAGE_CANVAS_HEIGHT,
   WELCOME_PAGE_CANVAS_WIDTH,
 } from '../commons/WelcomePageConstants.ts';
@@ -97,26 +98,19 @@ const WelcomePage = () => {
   return <div ref={pageContainer}></div>;
 };
 
+const src = 'src/assets/images/';
 const localAssets: AssetsToLoad[] = [
   {
-    alias: 'tilesBg',
-    src: 'src/assets/images/tiles-background.jpg',
+    alias: WELCOME_PAGE_ASSETS.galaxyBg,
+    src: `${src}galaxy-bg.jpg`,
   },
   {
-    alias: 'shadowOverlay',
-    src: 'src/assets/images/shadow-overlay.png',
+    alias: WELCOME_PAGE_ASSETS.rectange,
+    src: `${src}rectangle.png`,
   },
   {
-    alias: 'rainbowOverlay',
-    src: 'src/assets/images/rainbow-overlay.jpg',
-  },
-  {
-    alias: 'rectange',
-    src: 'src/assets/images/rectangle.png',
-  },
-  {
-    alias: 'ball',
-    src: 'src/assets/images/ball.png',
+    alias: WELCOME_PAGE_ASSETS.ball,
+    src: `${src}/ball.png`,
   },
 ];
 
