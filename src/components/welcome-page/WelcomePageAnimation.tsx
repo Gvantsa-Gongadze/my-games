@@ -48,20 +48,22 @@ const WelcomePageAnim = (): Container => {
 
   const ballsAnimations = BallsAnimations((ball: Sprite) => {
     ballsAnimationsBehinde.addChild(ball);
-    gsap.to(ball, {
-      tint: WELCOME_PAGE_MAIN_LIGHT_COLOR,
-      duration: 0.1,
-    });
+    if (ball && ball.position) {
+      gsap.to(ball, {
+        tint: WELCOME_PAGE_MAIN_LIGHT_COLOR,
+        duration: 0.1,
+      });
 
-    gsap.to(ball.position, {
-      duration: 4,
-      x: getRandomNumber(-10, -300),
-      y: getRandomNumber(-10, -300),
-      ease: 'none',
-      onComplete: () => {
-        ball.destroy();
-      },
-    });
+      gsap.to(ball.position, {
+        duration: 4,
+        x: getRandomNumber(-10, -300),
+        y: getRandomNumber(-10, -300),
+        ease: 'none',
+        onComplete: () => {
+          ball.destroy();
+        },
+      });
+    }
   });
   welcomePageContainer.addChild(ballsAnimations);
 

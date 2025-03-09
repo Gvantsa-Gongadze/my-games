@@ -12,8 +12,7 @@ import WelcomePageAnim from '../components/welcome-page/WelcomePageAnimation.tsx
 const WelcomePage = () => {
   const pageContainer = useRef<HTMLDivElement>(null);
   const appRef = useRef<Application | null>(null);
-  const gameContainerRef = useRef<Container>(new Container());
-  const animContainer = useRef<Container>(new Container());
+  const animationContainerRef = useRef<Container>(new Container());
 
   const handleResize = useCallback((): void => {
     if (!appRef.current) return;
@@ -31,8 +30,8 @@ const WelcomePage = () => {
   }, []);
 
   const initAnimation = useCallback((): void => {
-    animContainer.current = WelcomePageAnim();
-    gameContainerRef.current.addChild(animContainer.current);
+    const welcomePageContainer = WelcomePageAnim();
+    animationContainerRef.current.addChild(welcomePageContainer);
   }, []);
 
   const initCanvas = useCallback(async () => {
@@ -44,6 +43,7 @@ const WelcomePage = () => {
       height: WELCOME_PAGE_CANVAS_HEIGHT,
     });
     appRef.current = app;
+    app.stage.addChild(animationContainerRef.current);
 
     // Disable scrolling only when hovering over the canvas
     app.canvas.addEventListener('wheel', (event) => event.preventDefault(), {
@@ -70,15 +70,11 @@ const WelcomePage = () => {
     AssetsLoader(localAssets, () => {
       initAnimation();
       handleResize();
-      app.stage.addChild(gameContainerRef.current);
     });
 
     window.addEventListener('resize', () => {
       handleResize();
     });
-    return () => {
-      window.removeEventListener('resize', () => {});
-    };
   }, [handleResize, initAnimation]);
 
   useEffect(() => {
@@ -88,10 +84,12 @@ const WelcomePage = () => {
         appRef.current.destroy(true, { children: true });
         appRef.current = null;
       }
-      if (gameContainerRef.current) {
-        gameContainerRef.current.destroy(true);
-        gameContainerRef.current = new Container();
+      if (animationContainerRef.current) {
+        animationContainerRef.current.destroy(true);
+        animationContainerRef.current = new Container();
       }
+
+      window.removeEventListener('resize', () => {});
     };
   }, [initCanvas]);
 
