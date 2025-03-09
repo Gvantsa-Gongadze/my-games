@@ -1,4 +1,4 @@
-import { ColorType } from '../commons/WelcomePageType';
+import { ColorType } from '../commons/types/ColorChangingGalaxyTypes';
 
 export const getRandomColor = (): ColorType => {
   return Math.floor(Math.random() * 16777215);

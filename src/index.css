@@ -9,7 +9,7 @@ body {
   background-color: black;
 }
 
-.welcome-page-canvas {
+.color-changing-galaxy-page-canvas {
   /* border: #ff0000 1px solid; */
   transition: transform 0.1s ease-in-out;
 }

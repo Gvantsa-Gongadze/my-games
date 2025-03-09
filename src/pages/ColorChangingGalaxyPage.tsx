@@ -3,13 +3,13 @@ import { useCallback, useEffect, useRef } from 'react';
 import PixiDevtoolsHandler from '../hooks/PixiDevtoolsHandler.tsx';
 import AssetsLoader, { AssetsToLoad } from '../hooks/AssetsLoader.tsx';
 import {
-  WELCOME_PAGE_ASSETS,
-  WELCOME_PAGE_CANVAS_HEIGHT,
-  WELCOME_PAGE_CANVAS_WIDTH,
-} from '../commons/WelcomePageConstants.ts';
-import WelcomePageAnim from '../components/welcome-page/WelcomePageAnimation.tsx';
+  COLOR_CHANGING_ANIMATION_PAGE_ASSETS,
+  COLOR_CHANGING_ANIMATION_PAGE_CANVAS_HEIGHT,
+  COLOR_CHANGING_ANIMATION_PAGE_CANVAS_WIDTH,
+} from '../commons/constants/ColorChangingGalaxyConstants.ts';
+import ColorChangingAnimationView from '../components/color-changing-galaxy/ColorChangingAnimationView.tsx';
 
-const WelcomePage = () => {
+const ColorChangingGalaxyPage = () => {
   const pageContainer = useRef<HTMLDivElement>(null);
   const appRef = useRef<Application | null>(null);
   const animationContainerRef = useRef<Container>(new Container());
@@ -30,8 +30,8 @@ const WelcomePage = () => {
   }, []);
 
   const initAnimation = useCallback((): void => {
-    const welcomePageContainer = WelcomePageAnim();
-    animationContainerRef.current.addChild(welcomePageContainer);
+    const pageContainer = ColorChangingAnimationView();
+    animationContainerRef.current.addChild(pageContainer);
   }, []);
 
   const initCanvas = useCallback(async () => {
@@ -39,8 +39,8 @@ const WelcomePage = () => {
     const app = new Application();
     await app.init({
       backgroundColor: 0x000000,
-      width: WELCOME_PAGE_CANVAS_WIDTH,
-      height: WELCOME_PAGE_CANVAS_HEIGHT,
+      width: COLOR_CHANGING_ANIMATION_PAGE_CANVAS_WIDTH,
+      height: COLOR_CHANGING_ANIMATION_PAGE_CANVAS_HEIGHT,
     });
     appRef.current = app;
     app.stage.addChild(animationContainerRef.current);
@@ -63,8 +63,7 @@ const WelcomePage = () => {
 
     if (pageContainer.current && pageContainer.current.children.length < 1) {
       pageContainer.current.appendChild(app.canvas);
-      app.canvas.className = 'welcome-page-canvas';
-      pageContainer.current.className = 'welcome-page';
+      app.canvas.className = 'color-changing-galaxy-page-canvas';
     }
     // Load assets
     AssetsLoader(localAssets, () => {
@@ -99,17 +98,17 @@ const WelcomePage = () => {
 const src = 'src/assets/images/';
 const localAssets: AssetsToLoad[] = [
   {
-    alias: WELCOME_PAGE_ASSETS.galaxyBg,
+    alias: COLOR_CHANGING_ANIMATION_PAGE_ASSETS.galaxyBg,
     src: `${src}galaxy-bg.jpg`,
   },
   {
-    alias: WELCOME_PAGE_ASSETS.rectange,
+    alias: COLOR_CHANGING_ANIMATION_PAGE_ASSETS.rectange,
     src: `${src}rectangle.png`,
   },
   {
-    alias: WELCOME_PAGE_ASSETS.ball,
+    alias: COLOR_CHANGING_ANIMATION_PAGE_ASSETS.ball,
     src: `${src}/ball.png`,
   },
 ];
 
-export default WelcomePage;
+export default ColorChangingGalaxyPage;

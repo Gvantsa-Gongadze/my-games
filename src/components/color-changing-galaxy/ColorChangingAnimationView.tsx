@@ -1,36 +1,38 @@
 import { Container, Sprite } from 'pixi.js';
 import gsap, { Power2 } from 'gsap';
 import {
-  WELCOME_PAGE_MAIN_LIGHT_COLOR,
-  WELCOME_PAGE_RECTANGLE_POINTS,
-} from '../../commons/WelcomePageConstants.ts';
+  COLOR_CHANGING_ANIMATION_PAGE_MAIN_LIGHT_COLOR,
+  COLOR_CHANGING_ANIMATION_PAGE_RECTANGLE_POINTS,
+} from '../../commons/constants/ColorChangingGalaxyConstants.ts';
 import RectangleView from './rectangle/RectangleView.tsx';
 import BallsAnimations from './balls/BallsAnimations.ts';
 import BackgroundAnimation from './background/BackgroundAnimation.tsx';
 import { getRandomNumber } from '../../hooks/GetRandomNumber.tsx';
 
-const WelcomePageAnim = (): Container => {
-  const welcomePageContainer = new Container();
-  welcomePageContainer.label = 'welcome page';
+const ColorChangingAnimationView = (): Container => {
+  const ColorChangingAnimationontainer = new Container();
+  ColorChangingAnimationontainer.label = 'color changing galaxy page';
 
   const bgAnimContainer = BackgroundAnimation();
-  welcomePageContainer.addChild(bgAnimContainer);
+  ColorChangingAnimationontainer.addChild(bgAnimContainer);
   bgAnimContainer.label = 'background';
 
   const ballsAnimationsBehinde = new Container();
-  welcomePageContainer.addChild(ballsAnimationsBehinde);
+  ColorChangingAnimationontainer.addChild(ballsAnimationsBehinde);
   ballsAnimationsBehinde.label = 'balls behinde container';
 
-  const topRectAnimation = RectangleView(WELCOME_PAGE_MAIN_LIGHT_COLOR);
-  welcomePageContainer.addChild(topRectAnimation);
+  const topRectAnimation = RectangleView(
+    COLOR_CHANGING_ANIMATION_PAGE_MAIN_LIGHT_COLOR
+  );
+  ColorChangingAnimationontainer.addChild(topRectAnimation);
   topRectAnimation.label = 'rectangle';
   topRectAnimation.position.set(
-    WELCOME_PAGE_RECTANGLE_POINTS.x,
-    WELCOME_PAGE_RECTANGLE_POINTS.y
+    COLOR_CHANGING_ANIMATION_PAGE_RECTANGLE_POINTS.x,
+    COLOR_CHANGING_ANIMATION_PAGE_RECTANGLE_POINTS.y
   );
 
   gsap.to(topRectAnimation.position, {
-    y: WELCOME_PAGE_RECTANGLE_POINTS.y - 30,
+    y: COLOR_CHANGING_ANIMATION_PAGE_RECTANGLE_POINTS.y - 30,
     duration: 3,
     yoyo: true,
     repeat: -1,
@@ -50,7 +52,7 @@ const WelcomePageAnim = (): Container => {
     ballsAnimationsBehinde.addChild(ball);
     if (ball && ball.position) {
       gsap.to(ball, {
-        tint: WELCOME_PAGE_MAIN_LIGHT_COLOR,
+        tint: COLOR_CHANGING_ANIMATION_PAGE_MAIN_LIGHT_COLOR,
         duration: 0.1,
       });
 
@@ -65,9 +67,9 @@ const WelcomePageAnim = (): Container => {
       });
     }
   });
-  welcomePageContainer.addChild(ballsAnimations);
+  ColorChangingAnimationontainer.addChild(ballsAnimations);
 
-  return welcomePageContainer;
+  return ColorChangingAnimationontainer;
 };
 
-export default WelcomePageAnim;
+export default ColorChangingAnimationView;

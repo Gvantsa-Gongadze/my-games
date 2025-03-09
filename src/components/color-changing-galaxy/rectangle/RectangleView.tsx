@@ -1,9 +1,11 @@
 import { Assets, Sprite } from 'pixi.js';
-import { ColorType } from '../../../commons/WelcomePageType';
-import { WELCOME_PAGE_ASSETS } from '../../../commons/WelcomePageConstants';
+import { ColorType } from '../../../commons/types/ColorChangingGalaxyTypes';
+import { COLOR_CHANGING_ANIMATION_PAGE_ASSETS } from '../../../commons/constants/ColorChangingGalaxyConstants';
 
 const RectangleView = (tint: ColorType): Sprite => {
-  const rect = new Sprite(Assets.get(WELCOME_PAGE_ASSETS.rectange));
+  const rect = new Sprite(
+    Assets.get(COLOR_CHANGING_ANIMATION_PAGE_ASSETS.rectange)
+  );
   rect.label = 'rectangle';
 
   rect.skew.set(-3, -4.02);
