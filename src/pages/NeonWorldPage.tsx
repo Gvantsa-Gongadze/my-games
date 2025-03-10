@@ -6,6 +6,7 @@ import {
   COLOR_CHANGING_ANIMATION_PAGE_CANVAS_HEIGHT,
   COLOR_CHANGING_ANIMATION_PAGE_CANVAS_WIDTH,
 } from '../commons/constants/ColorChangingGalaxyConstants.ts';
+import NeowWorldView from '../components/neon-world/NeonWorldAnimationsView.tsx';
 
 const NeonWorldPage = () => {
   const pageContainer = useRef<HTMLDivElement>(null);
@@ -28,8 +29,8 @@ const NeonWorldPage = () => {
   }, []);
 
   const initAnimation = useCallback((): void => {
-    // const pageContainer = ColorChangingAnimationView();
-    // animationContainerRef.current.addChild(pageContainer);
+    const pageContainer = NeowWorldView();
+    animationContainerRef.current.addChild(pageContainer);
   }, []);
 
   const initCanvas = useCallback(async () => {
