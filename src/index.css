@@ -13,3 +13,7 @@ body {
   /* border: #ff0000 1px solid; */
   transition: transform 0.1s ease-in-out;
 }
+.neon-world-page-canvas {
+  /* border: #ff0000 1px solid; */
+  transition: transform 0.1s ease-in-out;
+}

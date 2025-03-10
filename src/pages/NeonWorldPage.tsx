@@ -3,13 +3,11 @@ import { useCallback, useEffect, useRef } from 'react';
 import PixiDevtoolsHandler from '../hooks/PixiDevtoolsHandler.tsx';
 import AssetsLoader, { AssetsToLoad } from '../hooks/AssetsLoader.tsx';
 import {
-  COLOR_CHANGING_ANIMATION_PAGE_ASSETS,
   COLOR_CHANGING_ANIMATION_PAGE_CANVAS_HEIGHT,
   COLOR_CHANGING_ANIMATION_PAGE_CANVAS_WIDTH,
 } from '../commons/constants/ColorChangingGalaxyConstants.ts';
-import ColorChangingAnimationView from '../components/color-changing-galaxy/ColorChangingAnimationView.tsx';
 
-const ColorChangingGalaxyPage = () => {
+const NeonWorldPage = () => {
   const pageContainer = useRef<HTMLDivElement>(null);
   const appRef = useRef<Application | null>(null);
   const animationContainerRef = useRef<Container>(new Container());
@@ -30,8 +28,8 @@ const ColorChangingGalaxyPage = () => {
   }, []);
 
   const initAnimation = useCallback((): void => {
-    const pageContainer = ColorChangingAnimationView();
-    animationContainerRef.current.addChild(pageContainer);
+    // const pageContainer = ColorChangingAnimationView();
+    // animationContainerRef.current.addChild(pageContainer);
   }, []);
 
   const initCanvas = useCallback(async () => {
@@ -63,7 +61,7 @@ const ColorChangingGalaxyPage = () => {
 
     if (pageContainer.current && pageContainer.current.children.length < 1) {
       pageContainer.current.appendChild(app.canvas);
-      app.canvas.className = 'color-changing-galaxy-page-canvas';
+      app.canvas.className = 'neon-world-page-canvas';
     }
     // Load assets
     AssetsLoader(localAssets, () => {
@@ -95,20 +93,20 @@ const ColorChangingGalaxyPage = () => {
   return <div ref={pageContainer}></div>;
 };
 
-const src = '/src/assets/images/';
+// const src = '/src/assets/images/';
 const localAssets: AssetsToLoad[] = [
-  {
-    alias: COLOR_CHANGING_ANIMATION_PAGE_ASSETS.galaxyBg,
-    src: `${src}galaxy-bg.jpg`,
-  },
-  {
-    alias: COLOR_CHANGING_ANIMATION_PAGE_ASSETS.rectange,
-    src: `${src}rectangle.png`,
-  },
-  {
-    alias: COLOR_CHANGING_ANIMATION_PAGE_ASSETS.ball,
-    src: `${src}/ball.png`,
-  },
+  // {
+  //   alias: COLOR_CHANGING_ANIMATION_PAGE_ASSETS.galaxyBg,
+  //   src: `${src}galaxy-bg.jpg`,
+  // },
+  // {
+  //   alias: COLOR_CHANGING_ANIMATION_PAGE_ASSETS.rectange,
+  //   src: `${src}rectangle.png`,
+  // },
+  // {
+  //   alias: COLOR_CHANGING_ANIMATION_PAGE_ASSETS.ball,
+  //   src: `${src}/ball.png`,
+  // },
 ];
 
-export default ColorChangingGalaxyPage;
+export default NeonWorldPage;
