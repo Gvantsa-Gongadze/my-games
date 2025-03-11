@@ -1,6 +1,6 @@
 import { Container } from 'pixi.js';
-import MauntainsView from './mountains/mountainsView';
 import { NEON_WORLD_PAGE_CANVAS_HEIGHT } from '../../commons/constants/NeonWorldConstants';
+import MauntainsView from './mountains/MountainsView';
 
 const NeowWorldView = (): Container => {
   const animationContainer = new Container();

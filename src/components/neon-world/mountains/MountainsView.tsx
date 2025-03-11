@@ -1,23 +1,39 @@
-import { Graphics } from 'pixi.js';
+import { Assets, Container, Graphics, Sprite } from 'pixi.js';
 import { PointType } from '../../../commons/types/NeonWorldTypes';
 
-const MauntainsView = () => {
+const MauntainsView = (): Container => {
+  const mauntainsContainer = new Container();
+  mauntainsContainer.label = 'Mountains';
+
   const mountainsGraphic = new Graphics();
-  mountainsGraphic.beginPath();
-  mountainsGraphic.setStrokeStyle({ width: 2, color: 0xffd700, alpha: 1 });
+  mountainsGraphic.label = 'shape';
+  mauntainsContainer.addChild(mountainsGraphic);
+  mountainsGraphic.setStrokeStyle({ width: 1, color: 0xffffff, alpha: 1 });
+
   let prevPoints: PointType = { cx: 0, cy: 0, x: 0, y: 0 };
-  console.error(points.length);
+
   points.forEach(({ cx, cy, x, y }) => {
     cx = prevPoints.x + cx;
     cy = prevPoints.y + cy;
     x = prevPoints.x + x;
     y = prevPoints.y + y;
-    mountainsGraphic.quadraticCurveTo(cx, cy, x, y, 10);
+
+    mountainsGraphic.quadraticCurveTo(cx, cy, x, y);
+
     prevPoints = { cx, cy, x, y };
   });
 
   mountainsGraphic.stroke();
-  return mountainsGraphic;
+
+  const maskLeft = new Sprite(Assets.get('gradient'));
+  mauntainsContainer.addChild(maskLeft);
+
+  maskLeft.width = mountainsGraphic.width;
+  maskLeft.height = mountainsGraphic.height + 100;
+  maskLeft.position.set(0, -maskLeft.height);
+
+  mountainsGraphic.mask = maskLeft;
+  return mauntainsContainer;
 };
 
 const points: PointType[] = [

@@ -40,6 +40,9 @@ const NeonWorldPage = () => {
       backgroundColor: 0x000000,
       width: COLOR_CHANGING_ANIMATION_PAGE_CANVAS_WIDTH,
       height: COLOR_CHANGING_ANIMATION_PAGE_CANVAS_HEIGHT,
+      antialias: true,
+      autoDensity: true,
+      powerPreference: 'high-performance',
     });
     appRef.current = app;
     app.stage.addChild(animationContainerRef.current);
@@ -94,20 +97,12 @@ const NeonWorldPage = () => {
   return <div ref={pageContainer}></div>;
 };
 
-// const src = '/src/assets/images/';
+const src = '/src/assets/images/neon-world/';
 const localAssets: AssetsToLoad[] = [
-  // {
-  //   alias: COLOR_CHANGING_ANIMATION_PAGE_ASSETS.galaxyBg,
-  //   src: `${src}galaxy-bg.jpg`,
-  // },
-  // {
-  //   alias: COLOR_CHANGING_ANIMATION_PAGE_ASSETS.rectange,
-  //   src: `${src}rectangle.png`,
-  // },
-  // {
-  //   alias: COLOR_CHANGING_ANIMATION_PAGE_ASSETS.ball,
-  //   src: `${src}/ball.png`,
-  // },
+  {
+    alias: 'gradient',
+    src: `${src}gradient.png`,
+  },
 ];
 
 export default NeonWorldPage;
