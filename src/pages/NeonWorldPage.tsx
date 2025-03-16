@@ -103,6 +103,10 @@ const localAssets: AssetsToLoad[] = [
     alias: 'gradient',
     src: `${src}gradient.png`,
   },
+  {
+    alias: 'neon-gradient',
+    src: `${src}neon-gradient.png`,
+  },
 ];
 
 export default NeonWorldPage;

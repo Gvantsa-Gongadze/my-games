@@ -8,7 +8,7 @@ const MauntainsView = (): Container => {
   const mountainsGraphic = new Graphics();
   mountainsGraphic.label = 'shape';
   mauntainsContainer.addChild(mountainsGraphic);
-  mountainsGraphic.setStrokeStyle({ width: 1, color: 0xffffff, alpha: 1 });
+  mountainsGraphic.setStrokeStyle({ width: 2, color: 0xffffff, alpha: 1 });
 
   let prevPoints: PointType = { cx: 0, cy: 0, x: 0, y: 0 };
 
@@ -25,14 +25,16 @@ const MauntainsView = (): Container => {
 
   mountainsGraphic.stroke();
 
-  const maskLeft = new Sprite(Assets.get('gradient'));
-  mauntainsContainer.addChild(maskLeft);
+  const mask = new Sprite(Assets.get('gradient'));
+  mauntainsContainer.addChild(mask);
 
-  maskLeft.width = mountainsGraphic.width;
-  maskLeft.height = mountainsGraphic.height + 100;
-  maskLeft.position.set(0, -maskLeft.height);
+  mask.width = mountainsGraphic.width;
+  mask.height = mountainsGraphic.height + 100;
+  mask.position.set(0, -mask.height + 50);
+  mask.blendMode = 'multiply';
 
-  mountainsGraphic.mask = maskLeft;
+  mountainsGraphic.mask = mask;
+
   return mauntainsContainer;
 };
 
